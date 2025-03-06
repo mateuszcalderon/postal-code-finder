@@ -1,12 +1,11 @@
 import requests
 import re
 import folium
-from geopy.geocoders import Nominatim
 
 # Function to validate Postal/ZIP Code format.
 def is_postal_code_valid(postal_code, country_code):
     canada_pattern = re.compile(r"^[A-Za-z]\d[A-Za-z]$")
-    us_pattern = re.compile(r"^\d{5}(-\d{4})?$")
+    us_pattern = re.compile(r"^\d{5}$")
     if country_code == "ca":
         return bool(canada_pattern.match(postal_code))
     elif country_code == "us":
