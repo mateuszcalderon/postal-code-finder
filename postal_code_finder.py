@@ -3,7 +3,7 @@ import re
 import folium
 
 # Function to validate Postal/ZIP Code format.
-def is_postal_code_valid(postal_code, country_code):
+def is_postal_code_valid(country_code, postal_code):
     canada_pattern = re.compile(r"^[A-Za-z]\d[A-Za-z]$")
     us_pattern = re.compile(r"^\d{5}$")
     if country_code == "ca":
@@ -14,7 +14,7 @@ def is_postal_code_valid(postal_code, country_code):
         return False
 
 # Function to get Postal/ZIP Code information from the Zippopotam API.
-def get_postal_code_info(postal_code, country_code):
+def get_postal_code_info(country_code, postal_code):
     url = f"http://api.zippopotam.us/{country_code}/{postal_code}"
     response = requests.get(url)
     if response.status_code == 200:
@@ -27,7 +27,7 @@ def get_postal_code_info(postal_code, country_code):
 def display_selected_info(postal_code_info):
     if postal_code_info:
         place = postal_code_info["places"][0]
-        print(f"City: {place['place name']}")
+        print(f"Place Name: {place['place name']}")
         print(f"State: {place['state']}, {place['state abbreviation']}")
         print(f"Country: {postal_code_info['country']}, {postal_code_info['country abbreviation']}")
         print(f"Latitude: {place['latitude']}")
@@ -63,8 +63,8 @@ else:
     postal_code = None
 
 # Validate and process the Postal/ZIP Code.
-if postal_code and is_postal_code_valid(postal_code, country_code):
-    info = get_postal_code_info(postal_code, country_code)
+if postal_code and is_postal_code_valid(country_code, postal_code):
+    info = get_postal_code_info(country_code, postal_code)
     if info:
         display_selected_info(info)
         generate_map(info)
