@@ -6,10 +6,10 @@
   <h1>Postal Code Finder</h1>
 </div>
 
-Postal Code Finder is a Python-based tool designed to validate, retrieve, and display location details for Canadian Postal Codes and U.S. ZIP Codes. Using the Zippopotam API, it fetches geographic data such as the place name, state, country and coordinates. It also generates interactive maps to visually represent the given location.
+Postal Code Finder is a Python-based tool designed to validate, retrieve, and display location details for Canadian Postal Code and U.S. ZIP Code. Using the Zippopotam API, it fetches geographic data such as the place name, state, country and coordinates. It also generates interactive maps to visually represent the given location.
 
 ## Code Walkthrough:
-#### Library:
+#### Libraries:
 ```python
   import requests
   import re
@@ -103,6 +103,51 @@ Postal Code Finder is a Python-based tool designed to validate, retrieve, and di
 
   - This function creates an interactive map highlighting the location of the given Postal/ZIP Code.
   - It extracts latitude and longitude from the API response.
-  - The Folium library is used to create a map centered on the extracted coordinates. And the ` zoom_start=12 ` parameter defines the initial zoom level of the map, with 12 providing a moderately close view.
+  - The ` folium ` library is used to create a map centered on the extracted coordinates. And the ` zoom_start=12 ` parameter defines the initial zoom level of the map, with 12 providing a moderately close view.
   - A marker is placed on the map at the exactly coordinates location and the ` popup ` parameter adds a message displaying the Postal Code that appears when the user clicks on the marker.
   - And then, the function saves the map as an HTML file named after the Postal Code (e.g., ` 02139_MAP.html `).
+
+#### Main Code and Validation:
+```python
+  country_code = input("Enter a Country Code (CA or US): ").lower()
+  if country_code == "ca":
+    postal_code = input("Enter Postal Code: ")
+    elif country_code == "us":
+      postal_code = input("Enter ZIP Code: ")
+  else:
+      print("Invalid Country Code.")
+      postal_code = None
+  if postal_code and is_postal_code_valid(country_code, postal_code):
+    info = get_postal_code_info(country_code, postal_code)
+    if info:
+      display_selected_info(info)
+      generate_map(info)
+    else:
+      print("Valid Format but Data Not Found.")
+    else:
+      if postal_code:
+        print("Invalid ZIP/Postal Code Format.")
+```
+
+  - This part of code handles the input and output of the script.
+  - Based on the country code entered (CA or US), the user is prompted to enter the corresponding Postal or ZIP Code. If the user enter a different country code, the message "Invalid Country Code." will be printed.
+  - The code validates the format of the entered Postal/ZIP Code using the ` is_postal_code_valid function `.
+  - If the code is valid, it fetches information from the Zippopotam API using the ` get_postal_code_info ` function.
+  - If valid data is found, it displays the selected information using the ` display_selected_info ` function and generates a map using the ` generate_map ` function.
+  - If the data is not found, it prints "Valid Format but Data Not Found."
+  - If the code is invalid, it prints "Invalid ZIP/Postal Code Format."
+
+## Development Environment:
+This project was developed using the following tools and versions:
+  - folium: 0.19.4
+  - Visual Studio Code: 1.98.0
+  - pip: 24.3.1
+  - Python: 3.13.1
+  - requests: 2.32.3
+  - re: (built-in)
+
+## Contact:
+Feel free to reach out to me with any questions, suggestions, or feedback!<br/>
+  * [GitHub](https://github.com/mateuszcalderon)
+  * [Instagram](https://www.instagram.com/mateuszcalderon/)
+  * [LinkedIn](https://www.linkedin.com/in/mateuszcalderonreis/)
