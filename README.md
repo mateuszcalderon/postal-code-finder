@@ -138,13 +138,14 @@ Postal Code Finder is a Python-based tool designed to validate, retrieve, and di
   - If the code is invalid, it prints "Invalid ZIP/Postal Code Format."
 
 ## Development Environment:
-This project was developed using the following tools and versions:
-  - folium: 0.19.4
-  - Visual Studio Code: 1.98.0
-  - pip: 24.3.1
-  - Python: 3.13.1
-  - requests: 2.32.3
-  - re: (built-in)
+This project was built using the following tools and their respective versions:
+  - **Programming Language:** Python 3.13.1
+  - **Editor:** Visual Studio Code 1.98.0
+  - **Package Manager:** pip 24.3.1
+  - **Libraries:**
+    - requests: 2.32.3
+    - re: (built-in)
+    - folium: 0.19.4
 
 ## Contact:
 Feel free to reach out to me with any questions, suggestions, or feedback!<br/>
